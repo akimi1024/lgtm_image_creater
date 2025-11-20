@@ -14,16 +14,16 @@ jobs:
           key: deps-{{ checksum "requirements.lock" }}
           paths:
             - "~/.local"
-    test:
-      docker:
-        - image: cimg/python:3.12
-      steps:
-        - checkout
-        - restore_cache:
-            key: deps-{{ checksum "requirements.lock" }}
-        - run:
-            command: |
-              python3 -m unittest -v
+  test:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps-{{ checksum "requirements.lock" }}
+      - run:
+          command: |
+            python3 -m unittest -v
 
 workflows:
   version: 2
