@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   setup_dependencies:
     docker:
-      - image: circleci/python:3.12
+      - image: cimg/python:3.12
     steps:
       - checkout
       - restore_cache:
@@ -16,7 +16,7 @@ jobs:
             - "~/.local"
   test:
     docker:
-      - image: circleci/python:3.12
+      - image: cimg/python:3.12
     steps:
       - checkout
       - restore_cache:
