@@ -1,4 +1,5 @@
 from io import BytesIO
+from pathlib import Path
 import requests
 
 class LocalImage:
@@ -29,7 +30,7 @@ class _LoremFlicker(RemoteImage):
   HEIGHT = 600
 
   def __init__(self, keyword):
-    super().__init__(self.build_url(keyword))
+    super().__init__(self._build_url(keyword))
 
 
   def _build_url(self, keyword):
@@ -38,3 +39,19 @@ class _LoremFlicker(RemoteImage):
 
 
 KeywordImage = _LoremFlicker
+
+# コンストラクタとして利用するため
+# 単語を大文字始まりにしてクラスのように
+def ImageSource(keyword):
+  """最適なイメージクラスを返す"""
+  if keyword.startswith(('http://', 'https://')):
+    return RemoteImage(keyword)
+  elif Path(keyword).exists():
+    return LocalImage(keyword)
+  else:
+    return KeywordImage(keyword)
+
+
+def get_image(keyword):
+  """画像のファイルオブジェクトを返す"""
+  return ImageSource(keyword).get_image()
