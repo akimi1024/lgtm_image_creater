@@ -25,7 +25,7 @@ class RemoteImage:
 
 class _LoremFlicker(RemoteImage):
   """キーワード検索で画像を取得"""
-  LOREM_FLICKER_URL = 'https://loremflicker.com'
+  LOREM_FLICKER_URL = 'https://loremflickr.com'
   WIDTH = 800
   HEIGHT = 600
 
